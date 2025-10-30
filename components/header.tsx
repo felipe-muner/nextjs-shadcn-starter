@@ -1,9 +1,12 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 
 export function Header() {
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <header className="sticky top-0 z-50 w-full border-b border-green-500/20 bg-black/95 backdrop-blur supports-[backdrop-filter]:bg-black/80">
       <div className="relative overflow-hidden">
@@ -59,7 +62,7 @@ export function Header() {
             </Link>
           </nav>
 
-          {/* CTA Buttons */}
+          {/* CTA Buttons & Mobile Menu */}
           <div className="flex items-center space-x-2">
             <Button
               variant="ghost"
@@ -70,11 +73,86 @@ export function Header() {
             </Button>
             <Button
               size="sm"
-              className="relative overflow-hidden bg-gradient-to-r from-green-400 to-emerald-500 text-black font-semibold hover:shadow-lg hover:shadow-green-500/50 transition-all"
+              className="hidden md:inline-flex relative overflow-hidden bg-gradient-to-r from-green-400 to-emerald-500 text-black font-semibold hover:shadow-lg hover:shadow-green-500/50 transition-all"
             >
               <span className="relative z-10">Get Started</span>
               <div className="absolute inset-0 bg-gradient-to-r from-emerald-500 to-green-400 opacity-0 transition-opacity hover:opacity-100" />
             </Button>
+
+            {/* Mobile Menu */}
+            <Sheet open={isOpen} onOpenChange={setIsOpen}>
+              <SheetTrigger asChild className="md:hidden">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="text-gray-300 hover:text-green-400 hover:bg-green-500/10"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <line x1="4" x2="20" y1="12" y2="12" />
+                    <line x1="4" x2="20" y1="6" y2="6" />
+                    <line x1="4" x2="20" y1="18" y2="18" />
+                  </svg>
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="right" className="bg-black border-green-500/20 w-[300px]">
+                <SheetHeader>
+                  <SheetTitle className="text-green-400">Menu</SheetTitle>
+                </SheetHeader>
+                <div className="flex flex-col space-y-4 mt-8">
+                  <Link
+                    href="/features"
+                    onClick={() => setIsOpen(false)}
+                    className="text-gray-300 hover:text-green-400 transition-colors py-2 px-4 rounded-md hover:bg-green-500/10"
+                  >
+                    Features
+                  </Link>
+                  <Link
+                    href="/pricing"
+                    onClick={() => setIsOpen(false)}
+                    className="text-gray-300 hover:text-green-400 transition-colors py-2 px-4 rounded-md hover:bg-green-500/10"
+                  >
+                    Pricing
+                  </Link>
+                  <Link
+                    href="/about"
+                    onClick={() => setIsOpen(false)}
+                    className="text-gray-300 hover:text-green-400 transition-colors py-2 px-4 rounded-md hover:bg-green-500/10"
+                  >
+                    About
+                  </Link>
+                  <Link
+                    href="/docs"
+                    onClick={() => setIsOpen(false)}
+                    className="text-gray-300 hover:text-green-400 transition-colors py-2 px-4 rounded-md hover:bg-green-500/10"
+                  >
+                    Docs
+                  </Link>
+                  <div className="pt-4 border-t border-green-500/20 space-y-2">
+                    <Button
+                      variant="ghost"
+                      className="w-full justify-start text-gray-300 hover:text-green-400 hover:bg-green-500/10"
+                    >
+                      Sign In
+                    </Button>
+                    <Button
+                      className="w-full bg-gradient-to-r from-green-400 to-emerald-500 text-black font-semibold"
+                    >
+                      Get Started
+                    </Button>
+                  </div>
+                </div>
+              </SheetContent>
+            </Sheet>
           </div>
           </div>
         </div>
