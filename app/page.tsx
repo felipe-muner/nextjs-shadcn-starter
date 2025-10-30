@@ -1,4 +1,6 @@
 import Image from "next/image";
+import { ButtonGroup } from "@/components/ui/button-group";
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
   return (
@@ -33,6 +35,12 @@ export default function Home() {
             </a>{" "}
             center.
           </p>
+
+          <ButtonGroup className="mt-4">
+            <Button variant="default">Button 1</Button>
+            <Button variant="outline">Button 2</Button>
+            <Button variant="outline">Button 3</Button>
+          </ButtonGroup>
         </div>
         <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
           <a
